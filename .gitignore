@@ -1,0 +1,8 @@
+# ignored extensions
+*.zip
+*.rar
+*.url
+
+# ignored local / test folders
+\[pdf\]/
+nextjs-course-code/
