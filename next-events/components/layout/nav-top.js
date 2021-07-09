@@ -33,8 +33,7 @@ export default function NavTop() {
         </Link>
 
         <NavMain>
-            <Link href="/events">All Events</Link>
-            <Link href="/events/year/month/etc">Search</Link>
+            <Link href="/events">All events</Link>
         </NavMain>
     </Nav>
 }

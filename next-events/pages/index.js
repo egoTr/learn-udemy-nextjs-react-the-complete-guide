@@ -9,23 +9,28 @@ import { getFeaturedEvents } from '../dummy-data';
 
 // styles
 const eventsContainer = {
-  display: 'flex'
+  display: 'flex',
+  flexWrap: 'wrap'
 };
 
 export default function Home() {
   const featuredEvents = getFeaturedEvents();
+
+  let content = (<h3>No featured events.</h3>);
+  if (featuredEvents.length > 0)
+    content = (<><h3>Featured events</h3>
+
+      <div style={eventsContainer}>
+        {featuredEvents.map((item, i) =>
+          <EventItem key={item.id} data={item} />
+        )}
+      </div></>);
 
   return <>
     <Head>
       <title>Home - Next Events</title>
     </Head>
 
-    <h3>Featured Events</h3>
-
-    <div style={eventsContainer}>
-      {featuredEvents.map((item, i) =>
-        <EventItem key={item.id} data={item} />
-      )}
-    </div>
+    {content}
   </>
 }

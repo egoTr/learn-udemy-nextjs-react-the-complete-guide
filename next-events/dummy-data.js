@@ -39,12 +39,24 @@ const DUMMY_EVENTS = [
     return DUMMY_EVENTS;
   }
   
-  export function getFilteredEvents(dateFilter) {
-    const { year, month } = dateFilter;
-  
+  export function getYears() {
+    let yearsDuplicated = DUMMY_EVENTS.map( event => {
+      const d = new Date(event.date);
+      return d.getFullYear()
+    });
+
+    yearsDuplicated.sort();
+
+    return Array.from( new Set(yearsDuplicated) );
+  }
+
+  export function getFilteredEvents(year, month) { 
     let filteredEvents = DUMMY_EVENTS.filter((event) => {
-      const eventDate = new Date(event.date);
-      return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
+      const d = new Date(event.date);
+
+      if (month === 'all') return d.getFullYear() == year;
+      
+      return d.getFullYear() == year && d.getMonth() == month - 1;
     });
   
     return filteredEvents;

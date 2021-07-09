@@ -2,14 +2,15 @@
 import Head from 'next/head'
 
 // components
+import Search from '../../components/search';
 import EventItem from '../../components/event-item';
 
 // data
 import { getAllEvents } from '../../dummy-data';
 
-// styles
 const eventsContainer = {
-  display: 'flex'
+  display: 'flex',
+  flexWrap: 'wrap'
 };
 
 export default function Home() {
@@ -17,14 +18,14 @@ export default function Home() {
 
   return <>
     <Head>
-      <title>All Events</title>
+      <title>All events</title>
     </Head>
 
-    <h3>All Events</h3>
+    <Search />
 
     <div style={eventsContainer}>
       {AllEvents.map((item, i) =>
-        <EventItem key={item.id} data={item} />
+        <EventItem key={item.id} data={item} details={false} />
       )}
     </div>
   </>
