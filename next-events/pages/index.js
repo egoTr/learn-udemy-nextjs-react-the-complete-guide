@@ -1,11 +1,12 @@
 // dependences
-import Head from 'next/head'
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 // components
 import EventItem from '../components/event-item';
 
-// data
-import { getFeaturedEvents } from '../dummy-data';
+// config, data
+import { getFeaturedEvents } from '../helpers/firebase';
 
 // styles
 const eventsContainer = {
@@ -13,8 +14,10 @@ const eventsContainer = {
   flexWrap: 'wrap'
 };
 
-export default function Home() {
-  const featuredEvents = getFeaturedEvents();
+export default function Home({ featuredEvents }) {
+  const router = useRouter;
+  if (router.isFallback)
+    return <p>Loading...</p>;
 
   let content = (<h3>No featured events.</h3>);
   if (featuredEvents.length > 0)
@@ -33,4 +36,15 @@ export default function Home() {
 
     {content}
   </>
+}
+
+export async function getStaticProps(context) {
+  const featuredEvents = await getFeaturedEvents();
+
+  return {
+    props: {
+      featuredEvents
+    },
+    revalidate: 1800 // 30 minutes
+  }
 }

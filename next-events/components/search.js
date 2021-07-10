@@ -2,8 +2,6 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 
-import { getYears } from '../dummy-data';
-const years = getYears();
 const monthNums = ['all', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const monthWords = ['All months', 'January', "February", 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -28,7 +26,7 @@ const Hr = styled.div`
     margin: 10px 0 5px 0;
 `;
 
-export default function Search() {
+export default function Search({ years }) {
     const refYear = useRef();
     const refMonth = useRef();
     const history = useRouter();
@@ -42,6 +40,12 @@ export default function Search() {
 
         history.push(`/events/${year}/${month}`);
     }
+
+    if (!years)
+        return <>
+            <p>Loading filter...</p>
+            <Hr />
+        </>;
 
     return <>
         <SearchDiv>

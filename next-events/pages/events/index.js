@@ -6,27 +6,38 @@ import Search from '../../components/search';
 import EventItem from '../../components/event-item';
 
 // data
-import { getAllEvents } from '../../dummy-data';
+import { getAllEvents, getYearsFromEvents } from '../../helpers/firebase';
 
 const eventsContainer = {
   display: 'flex',
   flexWrap: 'wrap'
 };
 
-export default function Home() {
-  const AllEvents = getAllEvents();
-
+export default function Home({ allEvents, years }) {
   return <>
     <Head>
       <title>All events</title>
     </Head>
 
-    <Search />
+    <Search years={years}/>
 
     <div style={eventsContainer}>
-      {AllEvents.map((item, i) =>
+      {allEvents.map((item, i) =>
         <EventItem key={item.id} data={item} details={false} />
       )}
     </div>
   </>
+}
+
+export async function getStaticProps(context) {
+  const allEvents = await getAllEvents();
+  const years = getYearsFromEvents(allEvents);
+
+  return {
+    props: {
+      allEvents,
+      years
+    },
+    revalidate: 60 // 1 minutes
+  }
 }

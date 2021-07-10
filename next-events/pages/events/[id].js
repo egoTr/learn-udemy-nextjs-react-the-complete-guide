@@ -3,16 +3,13 @@ import Head from 'next/head';
 
 import EventItem from '../../components/event-item';
 
-import { getEventById } from '../../dummy-data';
+import { getFeaturedEventsPath, getEventById } from '../../helpers/firebase';
 
-export default function AllEvents() {
+export default function AllEvents({ event }) {
     const router = useRouter();
-    const { id } = router.query;
-    const event = getEventById(id);
+    if (router.isFallback)
+        return (<p>Loading...</p>);
 
-    if (!event)
-        return (<p>Event not found.</p>);
-    
     return <>
         <Head>
             <title>{event.title}</title>
@@ -20,4 +17,27 @@ export default function AllEvents() {
 
         <EventItem data={event} details={true} />
     </>
+}
+
+export async function getStaticPaths() {
+    const paths = await getFeaturedEventsPath();
+
+    return {
+        paths,
+        fallback: true
+    }
+}
+
+export async function getStaticProps(context) {
+    const { params } = context;
+
+    const event = await getEventById(params.id);
+
+    if (!event)
+        return { notFound: true };
+
+    return {
+        props: { event },
+        revalidate: 30
+    };
 }

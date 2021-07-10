@@ -1,9 +1,11 @@
 // dependences
+import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import Head from 'next/head'
+import Head from 'next/head';
+import { useState, useEffect } from 'react';
 
 // data, components
-import { getFilteredEvents } from '../../dummy-data';
+import { FIREBASE_URL, getFilteredEventsSync, getYearsFromEvents } from '../../helpers/firebase';
 import Search from '../../components/search';
 import EventItem from '../../components/event-item';
 
@@ -21,32 +23,79 @@ const eventsContainer = {
     flexWrap: 'wrap'
 };
 
-export default function FilteredEvents() {
+export default function FilteredEvents() { // FilteredEvents({ filteredEvents, years })
+    let filteredEvents;
+    let year, month;
     const router = useRouter();
 
-    // this sucks
-    let slug = router.query.slug;
-    if (!slug)
-        return <p>Loading...</p>
+    const [events, setEvents] = useState();
+    const [years, setYears] = useState();
 
-    const [year, month] = slug;
-    const results = getFilteredEvents(year, month);
+    const { data, error } = useSWR(FIREBASE_URL);
+    useEffect(() => {
+        if (data) {
+            let results = [];
 
-    let content = <p>No events found.</p>;
-    if (results.length > 0)
-        content = (<div style={eventsContainer}>
-            {results.map((item, i) =>
-                <EventItem key={item.id} data={item} details={false} />
-            )}
-        </div>);
+            for (const key in data)
+                results.push({ id: key, ...data[key] });
+
+            setYears( getYearsFromEvents(results) );
+            setEvents(results);
+        } // if
+
+        return () => {
+            // cleanup codes
+        }
+    }, [data]);
+
+    const slug = router.query.slug;
+    if (slug) // this sucks
+        [year, month] = slug;
+
+    if (events) // this also sucks
+        filteredEvents = getFilteredEventsSync(events, year, month);
+    
+    let content = (<>
+        <p>Loading...</p>
+    </>);
+
+    if (events && filteredEvents.length === 0)
+        content = (<>
+            <p>No events found.</p>
+        </>);
+    
+    if (events && filteredEvents.length > 0)
+        content = (<>
+            <div style={eventsContainer}>
+                {filteredEvents.map((item, i) =>
+                    <EventItem key={item.id} data={item} details={false} />
+                )}
+            </div>
+        </>);
 
     return <>
         <Head>
             <title>Search results - Next Events</title>
         </Head>
 
-        <Search />
+        <Search years={years} />
 
         {content}
     </>
 }
+
+/* export async function getServerSideProps(context) {
+    const { params, query, req, res } = context;
+    const [year, month] = params.slug;
+
+    const allEvents = await getAllEvents();
+    const filteredEvents = getFilteredEventsSync(allEvents, year, month);
+    const years = getYearsFromEvents(allEvents);
+
+    return {
+        props: {
+            filteredEvents,
+            years
+        }
+    }
+} */
