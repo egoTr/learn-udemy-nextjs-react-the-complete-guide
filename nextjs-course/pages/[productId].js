@@ -18,7 +18,7 @@ export async function getStaticPaths() {
     })
 
     return {
-        paths,  // could be partial listed
+        paths,  // could be partially listed
         fallback: false
         // false: show 404 page if not listed
         // true: show fallback content (implemented in the component function) while generating
