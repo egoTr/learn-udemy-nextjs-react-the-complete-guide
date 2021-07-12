@@ -28,7 +28,7 @@ const NavMain = styled.div`
 
 export default function NavTop() {
     return <Nav>
-        <Link href="/">
+        <Link href="/" passHref>
             <NavApp>Next Events</NavApp>
         </Link>
 
