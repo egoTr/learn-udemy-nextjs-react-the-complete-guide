@@ -1,0 +1,26 @@
+[
+    {
+        "id": "e1",
+        "title": "Event #1",
+        "location": "Hue",
+        "description": "Description for Event#1"
+    },
+    {
+        "id": "e2",
+        "title": "Event #2",
+        "location": "Hanoi",
+        "description": "Description for Event#2"
+    },
+    {
+        "id": "e3",
+        "title": "Event#3",
+        "location": "",
+        "description": ""
+    },
+    {
+        "id": "e4",
+        "title": "Event #4",
+        "location": "Ho Chi Minh",
+        "description": ""
+    }
+]
