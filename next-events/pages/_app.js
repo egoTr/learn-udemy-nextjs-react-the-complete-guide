@@ -4,6 +4,7 @@ import '../styles/globals.css'
 // components
 import NavTop from '../components/layout/nav-top'
 import Wrapper from '../components/layout/wrapper';
+import Footer from '../components/layout/footer';
 
 function MyApp({ Component, pageProps }) {
   return <>
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
     <Wrapper>
       <Component {...pageProps} />
     </Wrapper>
+    <Footer />
   </>
 }
 

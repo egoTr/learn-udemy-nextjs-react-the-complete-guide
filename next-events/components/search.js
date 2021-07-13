@@ -2,6 +2,8 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 
+import Hr from './layout/hr';
+
 const monthNums = ['all', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const monthWords = ['All months', 'January', "February", 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -18,12 +20,6 @@ const SearchDiv = styled.div`
     & button {
         padding: 5px 10px;
     }
-`;
-const Hr = styled.div`
-    background-color: var(--color-app-secondary);
-    width: 100%;
-    height: 2px;
-    margin: 10px 0 5px 0;
 `;
 
 export default function Search({ years }) {

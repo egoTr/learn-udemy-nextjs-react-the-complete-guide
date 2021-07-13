@@ -1,11 +1,24 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
+// components
+import CommentForm from '../../components/comment/comment-form';
+import CommentList from '../../components/comment/comment-list';
 import EventItem from '../../components/event-item';
+import Hr from '../../components/layout/hr';
 
 import { getFeaturedEventsPath, getEventById } from '../../helpers/firebase';
 
-export default function AllEvents({ event }) {
+// styles
+import styled from 'styled-components';
+const CommentContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export default function EventDetails({ event }) {
     const router = useRouter();
     if (router.isFallback)
         return (<p>Loading...</p>);
@@ -14,8 +27,15 @@ export default function AllEvents({ event }) {
         <Head>
             <title>{event.title}</title>
         </Head>
-
+        
         <EventItem data={event} details={true} />
+
+        <Hr />
+
+        <CommentContainer>
+            <CommentForm eventId={event.id} />
+            <CommentList eventId={event.id} />
+        </CommentContainer>
     </>
 }
 

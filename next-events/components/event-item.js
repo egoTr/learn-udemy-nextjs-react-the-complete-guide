@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-// icons
+// components
 import IconDate from './icons/icon-date';
 import IconLocation from './icons/icon-location';
 

@@ -4,14 +4,14 @@ import Link from 'next/link';
 // styles
 import styled from 'styled-components';
 const Nav = styled.div`
-    background-color: #f9f9f9;
+    background-color: var(--color-app-primary);
     padding: 10px 20px;
     display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
 `;
 const NavApp = styled.div`
-    color: var(--color-app-primary);
+    color: white;
     font-size: 120%;
     font-weight: bold;
     cursor: pointer;
@@ -23,6 +23,10 @@ const NavMain = styled.div`
 
     & * {
         margin-left: 10px;
+    }
+
+    & a {
+        color: white;
     }
 `;
 

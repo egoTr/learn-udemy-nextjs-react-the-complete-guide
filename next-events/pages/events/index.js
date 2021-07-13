@@ -13,7 +13,7 @@ const eventsContainer = {
   flexWrap: 'wrap'
 };
 
-export default function Home({ allEvents, years }) {
+export default function AllEvents({ allEvents, years }) {
   return <>
     <Head>
       <title>All events</title>
