@@ -5,6 +5,12 @@
   --color-app-primary-rgb: 255,0,102;
   --color-app-secondary: #3cba54;
   --color-app-secondary-rgb: 60,186,84;
+
+  --color-status-success: #28a745;
+  --color-status-info: #117a8b;
+  --color-status-warning: #d39e00;
+  --color-status-danger: #bd2130;
+  --color-status-error: #f00;
 }
 
 * {

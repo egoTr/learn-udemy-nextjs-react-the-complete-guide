@@ -1,4 +1,4 @@
-import RegistrationForm from "../registration-form";
+import NewsLetterRegisterForm from "../newsletter-register-form";
 
 // styles
 import styled from "styled-components";
@@ -12,6 +12,6 @@ const FooterDiv = styled.div`
 
 export default function Footer() {
     return <FooterDiv>
-        <RegistrationForm />
+        <NewsLetterRegisterForm />
     </FooterDiv>
 }

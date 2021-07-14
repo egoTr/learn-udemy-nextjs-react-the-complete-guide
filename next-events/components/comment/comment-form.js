@@ -1,10 +1,19 @@
-import { useState, useRef } from 'react';
+import { NotificationContext } from '../../hooks/context-notification';
+import { useContext, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+
+// components
+import Hr from '../ui/hr';
 
 // styles
 import styled from 'styled-components';
-const Form = styled.form`
+const Container = styled.div`
     width: clamp(400px, 50%, 600px);
+    display: flex;
+    flex-direction: column;
+`;
+const Form = styled.form`
+    width: 100%;
     display: flex;
     flex-direction: column;
 
@@ -28,11 +37,20 @@ const Title = styled.p`
 `;
 
 export default function CommentForm({ eventId }) {
-    const [submitted, setSubmitted] = useState(false);
+    const { notify } = useContext(NotificationContext);
+
+    const [status, setStatus] = useState();
 
     const refName = useRef();
     const refEmail = useRef();
     const refComment = useRef();
+
+    useEffect(() => {
+        if (status === 'info')
+            notify(status, 'Next Events', `Your comment has been submitted successfully.`)
+        else if (status === 'error')
+            notify(status, 'Next Events', 'Something went wrong :((')
+    }, [status]);
 
     async function submitHandler(event) {
         event.preventDefault();
@@ -45,44 +63,52 @@ export default function CommentForm({ eventId }) {
             email: refEmail.current.value,
             comment: refComment.current.value
         }
-        const response = await axios.post(
-            `/api/comments/${eventId}`,
-            JSON.stringify(commentData),
-            {
-                headers: {
-                    'Content-Type': 'application/json'
+        try {
+            const response = await axios.post(
+                `/api/comments/${eventId}`,
+                JSON.stringify(commentData),
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }
-        ); // axios.post
+            ); // axios.post
 
-        setSubmitted(true);
+            setStatus('info');
+        } catch (err) {
+            setStatus('error');
+        } // catch
     }
 
-    if (submitted)
-        return <p>Your comment has been submitted successfully.</p>;
+    if (status)
+        return <></>;
 
-    return <Form onSubmit={submitHandler}>
-        <Title>Leave a comment</Title>
-        <input
-            name="name"
-            type="text"
-            placeholder="Your name (required)"
-            required
-            ref={refName}
-        />
-        <input
-            name="email"
-            type="email"
-            placeholder="Your email"
-            ref={refEmail}
-        />
-        <textarea
-            name="comment"
-            placeholder="Comment goes here (required)"
-            required
-            ref={refComment}
-        >
-        </textarea>
-        <button className="btn-secondary">Submit</button>
-    </Form>
+    return <Container>
+        <Form onSubmit={submitHandler}>
+            <Title>Leave a comment</Title>
+            <input
+                name="name"
+                type="text"
+                placeholder="Your name (required)"
+                required
+                ref={refName}
+            />
+            <input
+                name="email"
+                type="email"
+                placeholder="Your email"
+                ref={refEmail}
+            />
+            <textarea
+                name="comment"
+                placeholder="Comment goes here (required)"
+                required
+                ref={refComment}
+            >
+            </textarea>
+            <button className="btn-secondary">Submit</button>
+        </Form>
+
+        <Hr />
+    </Container>
 }

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // components
-import IconDate from './icons/icon-date';
-import IconLocation from './icons/icon-location';
+import IconDate from './ui/icon-date';
+import IconLocation from './ui/icon-location';
 
 // styles
 import styled from 'styled-components';

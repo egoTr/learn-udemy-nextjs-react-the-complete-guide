@@ -19,7 +19,7 @@ async function register(res, email) {
         return res.status(200).json({ msg: 'Registered successfully.' });
     } catch(err) {
         if (err.code === 11000) // unique index
-            return res.status(200).json({ msg: 'Email existed.' });
+            return res.status(422).json({ msg: 'Email existed.' });
         
         console.log(err.message);
         return res.status(500).send('Internal server error');

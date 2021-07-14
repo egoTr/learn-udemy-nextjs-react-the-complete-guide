@@ -2,8 +2,6 @@ import useSWR from 'swr';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Hr from "../layout/hr";
-
 // styles
 import styled from "styled-components";
 const CommentsDiv = styled.div`
@@ -72,8 +70,6 @@ export default function CommentList({ eventId }) {
         );
 
     return <CommentsDiv>
-        <Hr />
-
         {content}
     </CommentsDiv>
 }

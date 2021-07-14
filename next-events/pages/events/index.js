@@ -2,7 +2,7 @@
 import Head from 'next/head'
 
 // components
-import Search from '../../components/search';
+import Search from '../../components/ui/search';
 import EventItem from '../../components/event-item';
 
 // data

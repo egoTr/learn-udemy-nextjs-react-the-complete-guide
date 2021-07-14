@@ -5,7 +5,7 @@ import Head from 'next/head';
 import CommentForm from '../../components/comment/comment-form';
 import CommentList from '../../components/comment/comment-list';
 import EventItem from '../../components/event-item';
-import Hr from '../../components/layout/hr';
+import Hr from '../../components/ui/hr';
 
 import { getFeaturedEventsPath, getEventById } from '../../helpers/firebase';
 

@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 
-import Hr from './layout/hr';
+import Hr from './hr';
 
 const monthNums = ['all', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const monthWords = ['All months', 'January', "February", 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

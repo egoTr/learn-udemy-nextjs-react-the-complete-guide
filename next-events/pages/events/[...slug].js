@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 // data, components
 import { FIREBASE_URL, getFilteredEventsSync, getYearsFromEvents } from '../../helpers/firebase';
-import Search from '../../components/search';
+import Search from '../../components/ui/search';
 import EventItem from '../../components/event-item';
 
 // styles
