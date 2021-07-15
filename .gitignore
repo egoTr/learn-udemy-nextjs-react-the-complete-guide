@@ -6,3 +6,8 @@
 # ignored local / test folders
 \[pdf\]/
 nextjs-course-code/
+node_modules/
+
+# misc
+.gitignore
+package-lock.json
