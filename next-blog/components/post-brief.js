@@ -8,23 +8,27 @@ import IconDate from './ui/icon-date';
 // styles
 import styled from 'styled-components';
 const PostDiv = styled.div`
-    background-color: ${props => props.details ? 'rgba(var(--color-app-primary-rgb), 0.05)' : '#f9f9f9'};
-    width: ${props => props.details ? '100%' : 'clamp(300px, 30%, 500px)'};
+    background-color: #f9f9f9;
+    width: clamp(300px, 30%, 500px);
     margin: 20px 20px 0 0;
     padding: 10px;
-    border: ${props => props.details ? 'solid 5px var(--color-app-primary)' : 'solid 1px #ddd'};
-    border-radius: ${props => props.details ? '10px' : '5px'};
+    border: solid 1px #ddd;
+    border-radius: 5px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    &:hover {
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    }
+    
     & * {
         text-align: center;
     }
 
     & h3 {
-        color: ${props => props.details ? 'var(--color-app-primary)' : 'black'};
+        color: black;
         cursor: pointer;
     }
 
@@ -32,7 +36,7 @@ const PostDiv = styled.div`
         width: 100%; max-width: 500px;
         aspect-ratio: 1/1;
         max-height: 500px;
-        border-radius: ${props => props.details ? '50%' : '5px'};
+        border-radius: 5px;
     }
 
     & p {
@@ -46,8 +50,8 @@ const PostDiv = styled.div`
     }
 `;
 
-export default function PostItem(props) {
-    const { id, alias, title, date, image, excerpt } = props.data;
+export default function PostBrief(props) {
+    const { alias, title, date, image, excerpt } = props.data;
     const link = `/${alias}`;
     const imageParsed = `/images/posts/${alias}/${image}`;
     let dateFormatted = new Date(date);
@@ -60,7 +64,7 @@ export default function PostItem(props) {
         }
     )
 
-    return <PostDiv details={props.details}>
+    return <PostDiv>
         <Link href={link}>
             <a><h3>{title}</h3></a>
         </Link>
@@ -82,13 +86,9 @@ export default function PostItem(props) {
             </a>
         </Link>
 
-        {!props.details &&
-            <>
-                <p>{excerpt}</p>
-                <Link href={link} passHref>
-                    <button className="btn-secondary">View details</button>
-                </Link>
-            </>
-        }
+        <p>{excerpt}</p>
+        <Link href={link} passHref>
+            <button className="btn-secondary">View details</button>
+        </Link>
     </PostDiv>
 }

@@ -8,6 +8,7 @@ const DUMMY_POSTS = [
       excerpt:
         'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
       date: '2020-02-10',
+      content: '# This is the first post'
     },
     {
       alias: 'getting-started-with-nextjs-2',
@@ -16,6 +17,7 @@ const DUMMY_POSTS = [
       excerpt:
         'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
       date: '2020-06-05',
+      content: '# This is the second post'
     },
     {
       alias: 'getting-started-with-nextjs-3',
@@ -24,6 +26,7 @@ const DUMMY_POSTS = [
       excerpt:
         'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
       date: '2020-12-30',
+      content: '# This is the third post'
     },
     {
       alias: 'getting-started-with-nextjs-4',
@@ -32,6 +35,7 @@ const DUMMY_POSTS = [
       excerpt:
         'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
       date: '2021-02-14',
+      content: '# This is the 4th post'
     },
   ];
 
@@ -48,5 +52,9 @@ const DUMMY_POSTS = [
     const sortedDescPosts = _.orderBy(DUMMY_POSTS, ['date'], ['desc']);
     return sortedDescPosts.slice(0, 10);
   } // getLatestPosts
+
+  export function getPostByAlias(alias) {
+    return DUMMY_POSTS.find(post => post.alias === alias);
+  }
 
   export default DUMMY_POSTS;

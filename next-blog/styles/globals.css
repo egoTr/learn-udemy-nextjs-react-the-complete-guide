@@ -82,10 +82,19 @@ button:hover {
 }
 
 /* Classes */
+.stroke-primary {
+  stroke: var(--color-app-primary) !important; /* for svg */
+}
+.stroke-secondary {
+  stroke: var(--color-app-secondary) !important; /* for svg */
+}
+.stroke-white {
+  stroke: white !important; /* for svg */
+}
+
 .color-primary {
   color: var(--color-app-primary);
 }
-
 .color-secondary {
   color: var(--color-app-secondary);
 }

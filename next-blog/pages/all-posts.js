@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import PostItem from '../components/post-item';
+import PostBrief from '../components/post-brief';
 
 // styles
 import styled from 'styled-components';
@@ -22,7 +22,7 @@ export default function AllPosts() {
 
         <Container>
             {allPosts.map(post =>
-                <PostItem key={post.alias} data={post} />
+                <PostBrief key={post.alias} data={post} />
             )}
         </Container>
     </>
