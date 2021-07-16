@@ -48,7 +48,7 @@ export default function NewsLetterRegisterForm() {
 
         // post request
         const registrationData = {
-            id: Date.now(),
+            time: Date.now(),
             email: refEmail.current.value
         }
         try {
@@ -72,20 +72,18 @@ export default function NewsLetterRegisterForm() {
     }
     return <>
         <Form onSubmit={submitHandler}>
-            {status === 'success' && <p>You've subscribed successfully.</p>}
-            {status !== 'success' &&
-                <>
-                    <p>Join the newsletter</p>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        ref={refEmail}
-                    />
-                    <button>Subscribe</button>
-                </>
-            }
+            <p>Join the newsletter</p>
+            <input
+                name="email"
+                ref={refEmail}
+                type="email"
+                placeholder="Your email"
+                disabled={status === 'success'}
+                required
+            />
+            <button disabled={status === 'success'}>
+                {status === 'success' ? 'Subscribed' : 'Subscribe'}
+            </button>
         </Form>
     </>
 }

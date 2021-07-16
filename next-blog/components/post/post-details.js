@@ -11,6 +11,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import IconDate from '../ui/icons/icon-date';
 import IconUser from '../ui/icons/icon-user';
 import Hr from '../ui/hr';
+import CodeBlockWithCopyButton from '../ui/code-block-with-copy-icon';
 
 // styles
 import styled from 'styled-components';
@@ -104,9 +105,11 @@ export default function PostDetails(props) {
             const { className, children } = codeTag;
             const language = className.split('-')[1]; // className is something like language-js => We need the "js" part here
 
-            return <SyntaxHighlighter style={atomDark} language={language}>
-                {children}
-            </SyntaxHighlighter>
+            return <CodeBlockWithCopyButton text={children}>
+                <SyntaxHighlighter style={atomDark} language={language}>
+                    {children}
+                </SyntaxHighlighter>
+            </CodeBlockWithCopyButton>
         }
     } // CustomComponents
     return <>

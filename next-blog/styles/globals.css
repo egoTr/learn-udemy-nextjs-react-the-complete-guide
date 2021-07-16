@@ -60,6 +60,9 @@ button {
   border-radius: 3px;
   cursor: pointer;
 }
+button:disabled {
+  cursor: no-drop;
+}
 button.btn-primary {
   background-color: var(--color-app-primary);
 }
