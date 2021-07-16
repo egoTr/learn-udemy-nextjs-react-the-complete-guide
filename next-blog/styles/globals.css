@@ -20,7 +20,7 @@
   line-height: 1.5;
 }
 
-*:not(code) {
+*:not(code, pre, span, .token) {
   font-family: var(--font-app);
 }
 
@@ -35,14 +35,6 @@ body {
 }
 
 /* Elements */
-code {
-  background-color: #f9f9f9;
-  color: var(--color-app-primary);
-  padding: 5px;
-  border: solid 1px #ddd;
-  border-radius: 5px;
-}
-
 a {
   text-decoration: none;
   cursor: pointer;

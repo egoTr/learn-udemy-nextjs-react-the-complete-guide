@@ -3,13 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // components
-import IconDate from './ui/icon-date';
+import IconDate from '../ui/icons/icon-date';
 
 // styles
 import styled from 'styled-components';
 const PostDiv = styled.div`
     background-color: #f9f9f9;
-    width: clamp(300px, 30%, 500px);
+    width: clamp(400px, 30%, 600px);
     margin: 20px 20px 0 0;
     padding: 10px;
     border: solid 1px #ddd;
@@ -49,11 +49,27 @@ const PostDiv = styled.div`
         padding: 5px 10px;
     }
 `;
+const DetailsButtonDiv = styled.div` // Align button [Details] docks at the bottom
+    width: 100%;
+
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    & button {
+        width: 100%;
+    }
+`;
 
 export default function PostBrief(props) {
-    const { alias, title, date, image, excerpt } = props.data;
+    const { alias, meta, content } = props.data;
+    const { title, date, image, excerpt } = meta;
+
     const link = `/${alias}`;
+
     const imageParsed = `/images/posts/${alias}/${image}`;
+
     let dateFormatted = new Date(date);
     dateFormatted = dateFormatted.toLocaleDateString(
         'en-US',
@@ -87,8 +103,11 @@ export default function PostBrief(props) {
         </Link>
 
         <p>{excerpt}</p>
-        <Link href={link} passHref>
-            <button className="btn-secondary">View details</button>
-        </Link>
+
+        <DetailsButtonDiv>
+            <Link href={link} passHref>
+                <button className="btn-secondary">View details</button>
+            </Link>
+        </DetailsButtonDiv>
     </PostDiv>
 }

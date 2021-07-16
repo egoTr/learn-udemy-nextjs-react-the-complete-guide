@@ -13,6 +13,14 @@ const Container = styled.div`
     & * {
         text-align: center;
     }
+
+    & code {
+        background-color: #f9f9f9;
+        color: var(--color-app-primary);
+        padding: 5px;
+        border: solid 1px #ddd;
+        border-radius: 5px;
+    }
 `;
 export default function About() {
     return <>

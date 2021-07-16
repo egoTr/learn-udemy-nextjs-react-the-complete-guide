@@ -1,4 +1,4 @@
-import NewsLetterRegisterForm from "../newsletter-register-form";
+import NewsLetterRegisterForm from "../newsletter";
 
 // styles
 import styled from "styled-components";

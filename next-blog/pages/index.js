@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import PostBrief from '../components/post-brief';
+import PostBrief from '../components/post/post-brief';
 
 // styles
 import styled from 'styled-components';
@@ -10,11 +10,9 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-import { getLatestPosts } from '../dummy-data';
+import { getLatestPosts } from '../helpers/markdown';
 
-export default function Home() {
-  const latestPosts = getLatestPosts();
-
+export default function Home({ latestPosts }) {
   return (
     <>
       <Head>
@@ -28,4 +26,15 @@ export default function Home() {
       </Container>
     </>
   )
+}
+
+export async function getStaticProps(context) {
+  const latestPosts = getLatestPosts();
+
+  return {
+    props: {
+      latestPosts
+    },
+    revalidate: 86400 // 1 day
+  }
 }

@@ -1,7 +1,7 @@
 import { NotificationContext } from '../../hooks/context-notification';
 import { useContext } from 'react';
 
-import IconClose from './icon-close';
+import IconClose from './icons/icon-close';
 
 import styled from 'styled-components';
 const NotiDiv = styled.div`
