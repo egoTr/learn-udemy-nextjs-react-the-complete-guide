@@ -1,11 +1,8 @@
 // dependences
 import Head from 'next/head';
 import Image from 'next/image';
-
-// markdown
+import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 // components
 import IconDate from '../ui/icons/icon-date';
@@ -13,8 +10,18 @@ import IconUser from '../ui/icons/icon-user';
 import Hr from '../ui/hr';
 import CodeBlockWithCopyButton from '../ui/code-block-with-copy-icon';
 
+// reduce size of highlighter
+/* import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism' */
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+// register languages for Prism
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
+
 // styles
-import styled from 'styled-components';
 const PostDiv = styled.div`
     width: clamp(400px, 90%, 768px);
     margin: 0 auto;
