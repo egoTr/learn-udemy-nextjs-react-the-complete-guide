@@ -1,5 +1,4 @@
 // dependences
-import Head from 'next/head';
 import Image from 'next/image';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
@@ -58,11 +57,6 @@ const ImageDiv = styled.div`
 `;
 
 export default function PostDetails(props) {
-    if (!props.data)
-        return <Head>
-            <title>Loading...</title>
-        </Head>;
-
     const { alias, meta, content } = props.data;
     const { title, date, image, author, excerpt } = meta;
 
@@ -119,28 +113,22 @@ export default function PostDetails(props) {
             </CodeBlockWithCopyButton>
         }
     } // CustomComponents
-    return <>
-        <Head>
-            <title>{title}</title>
-        </Head>
+    return <PostDiv>
+        <PostHeader>
+            <PostTitle>{title}</PostTitle>
+            <div style={{ display: 'flex' }}>
+                <IconDate className="stroke-primary" />
+                <address>&nbsp;<i>{dateFormatted}</i></address>
+            </div>
+            <div style={{ display: 'flex' }}>
+                <IconUser className="stroke-primary" />
+                <address>&nbsp;<i>{author}</i></address>
+            </div>
+            <Hr />
+        </PostHeader>
 
-        <PostDiv>
-            <PostHeader>
-                <PostTitle>{title}</PostTitle>
-                <div style={{ display: 'flex' }}>
-                    <IconDate className="stroke-primary" />
-                    <address>&nbsp;<i>{dateFormatted}</i></address>
-                </div>
-                <div style={{ display: 'flex' }}>
-                    <IconUser className="stroke-primary" />
-                    <address>&nbsp;<i>{author}</i></address>
-                </div>
-                <Hr />
-            </PostHeader>
-
-            <ReactMarkdown components={CustomComponents}>
-                {content}
-            </ReactMarkdown>
-        </PostDiv>
-    </>
+        <ReactMarkdown components={CustomComponents}>
+            {content}
+        </ReactMarkdown>
+    </PostDiv>
 }

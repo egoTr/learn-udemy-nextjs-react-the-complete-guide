@@ -6,22 +6,29 @@ import _ from 'lodash/collection';
 const MARKDOWN_PATH = path.join(process.cwd(), '/_markdown-posts');
 const POSTS_PER_PAGE = 3;
 
+//* 2021.07.18
+// Try-catch to handle in case file not exists or failed to read file
 export function getPostData(filename) {
     const filePath = path.join(MARKDOWN_PATH, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    try {
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-    // data is meta-data
-    const { data, content } = matter(fileContent);
+        // data is meta-data
+        const { data, content } = matter(fileContent);
 
-    // get the alias
-    const alias = filename.replace(/\.md$/, '');
+        // get the alias
+        const alias = filename.replace(/\.md$/, '');
 
-    return {
-        meta: data,
-        content,
-        alias,
-        date: data.date // duplicated listing for _.orderBy()
-    }
+        return {
+            meta: data,
+            content,
+            alias,
+            date: data.date // duplicated listing for _.orderBy()
+        }
+    } catch (err) {
+        console.log(err.message);
+        return null;
+    } // catch
 }
 
 // Get all posts
@@ -29,7 +36,7 @@ export function getPostData(filename) {
 export function getAllPosts() {
     const files = fs.readdirSync(MARKDOWN_PATH);
 
-    const posts = files.map( file => getPostData(file) );
+    const posts = files.map(file => getPostData(file));
 
     // sort posts by date DESC
     return _.orderBy(posts, ['date'], ['desc']);
