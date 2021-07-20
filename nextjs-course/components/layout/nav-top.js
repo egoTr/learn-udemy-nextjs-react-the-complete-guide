@@ -36,18 +36,18 @@ export default function NavTop() {
     return <NavFuck>
         <Link href="/">Home</Link>
 
-        {/* If session is NOT loading & user is ALREADY logged in  */}
+        {/* If user is ALREADY logged in  */}
         {
-            (!loading && isLoggedIn) &&
+            (isLoggedIn) &&
             <>
                 <Link href="/profile">Profile</Link>
                 <button onClick={signOutHandler}>Log out</button>
             </>
         }
 
-        {/* If session is NOT loading & user is NOT logged in  */}
+        {/* If user is NOT logged in  */}
         {
-            (!loading && !isLoggedIn) &&
+            (!isLoggedIn) &&
             <>
                 <Link href="/login">Log in</Link>
                 <Link href="/sign-up">Sign up</Link>

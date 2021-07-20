@@ -1,8 +1,5 @@
 import { useRef } from "react";
 import axios from "axios";
-
-// authentication guard
-import Auther from "./auther";
  
 // styles
 import styled from 'styled-components';
@@ -41,7 +38,7 @@ export default function SignUpForm() {
 
         try {
             const response = await axios.post(
-                '/api/auth/sign-up',
+                '/api/user/sign-up',
                 JSON.stringify(userData),
                 {
                     headers: {
@@ -54,11 +51,10 @@ export default function SignUpForm() {
         } // catch
     }
 
-    return <Auther action="bypass">
+    return <>
         <FormDiv onSubmit={submitHandler}>
             <p>Your name:</p>
             <input
-                name="username"
                 type="text"
                 required
                 autoFocus
@@ -67,7 +63,6 @@ export default function SignUpForm() {
 
             <p>Your email:</p>
             <input
-                name="email"
                 type="text"
                 required
                 ref={refEmail}
@@ -75,7 +70,6 @@ export default function SignUpForm() {
 
             <p>Password:</p>
             <input
-                name="password"
                 type="password"
                 required
                 ref={refPassword}
@@ -90,5 +84,5 @@ export default function SignUpForm() {
 
             <button>Submit</button>
         </FormDiv>
-    </Auther>
+    </>
 }

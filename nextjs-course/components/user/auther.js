@@ -1,7 +1,5 @@
 /*
     Authentication guard
-    !!! NOT implemented for the /login page
-
     action = 'block'    => navigate to /login page if user NOT logged in yet
     action = 'bypass'   => navigate to home (/) if user ALREADY logged in
 */
@@ -9,7 +7,7 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
 
-export default function Auther({ children, action }) {
+export default function Auther({ children, action, next }) {
     const router = useRouter();
 
     // Be careful about the order !!!
@@ -20,7 +18,7 @@ export default function Auther({ children, action }) {
     if (loading)
         return <></>;
     else if (action === "block" && !isLoggedIn) {
-        router.replace('/login');
+        router.replace(`/login?next=${next}`);
 
         return <></> // It takes time to calculate the login state :((((
     } // else

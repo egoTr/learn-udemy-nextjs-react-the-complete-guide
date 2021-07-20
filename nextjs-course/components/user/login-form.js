@@ -22,6 +22,7 @@ const FormDiv = styled.form`
 
 export default function LoginForm() {
     const router = useRouter();
+    const { next } = router.query;
 
     const refUsernameOrEmail = useRef();
     const refPassword = useRef();
@@ -39,14 +40,13 @@ export default function LoginForm() {
         ) // signIn
         
         if (!result.error && true)
-            router.replace('/');
+            router.replace(next || '/profile');
     }
 
     return <>
         <FormDiv onSubmit={submitHandler}>
             <p>Username or email:</p>
             <input
-                name="usernameOrEmail"
                 type="text"
                 required
                 autoFocus
@@ -55,7 +55,6 @@ export default function LoginForm() {
 
             <p>Password:</p>
             <input
-                name="password"
                 type="password"
                 required
                 ref={refPassword}
